@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_clean_arch/domain/chatroom.dart';
+import 'package:flutter_clean_arch/screens/chat/chat_list.viewmodel.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+class ChatListScreen extends StatefulWidget {
+  const ChatListScreen({super.key});
+
+  @override
+  State<ChatListScreen> createState() => _ChatListScreenState();
+}
+
+class _ChatListScreenState extends State<ChatListScreen> {
+  @override
+  Widget build(BuildContext context) {
+    ChatListViewModel vm = context.watch<ChatListViewModel>();
+    return Scaffold(
+      appBar: AppBar(title: const Text("ChatList")),
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: vm.chatrooms.length,
+                itemBuilder: (contect, index) {
+                  Chatroom chatroom = vm.chatrooms[index];
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 6, 8, 6),
+                    child: GestureDetector(
+                      onTap: () => Get.toNamed("/chats/:chatId",
+                          arguments: [chatroom.chatroomId, chatroom.name]),
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: Text(chatroom.name),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          vm.createChatroom("New Chat");
+        },
+        tooltip: "Add Chatroom",
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
