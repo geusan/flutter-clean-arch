@@ -2,15 +2,30 @@
 
 A new Flutter project.
 
-## Getting Started
+## Objectitive
 
-This project is a starting point for a Flutter application.
+Make clean architectural flutter project.
 
-A few resources to get you started if this is your first Flutter project:
+## Requirements
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter MVVM design pattern
+- 4 Layer architecture: Domain / Repository / Service(Usecase) / Presentation(View, ViewModel)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Pub libs
+- Dio: Http request
+- get_it: Dependency injection
+- injectable: I don't know well.. i'm struggling
+- get: Page routers(can make named router easily)
+- provider: State management in viewmodel.(I had considered with RxDart with DI, it was too complex)
+- intl: i18n
+- shared_preferences, sqflite: local storage
+
+
+## Todo
+
+- [ ] Make auth screen for login(username and password)
+- [ ] Api(with go-clean-arch-chat-server), Sqflite (saving messages) Template
+- [ ] Make unit test cases
+- [ ] Refactoring
+- [ ] Refactoring
+- [ ] Refactoring

@@ -6,8 +6,8 @@ class DioClient {
   final LocalStorage _localStorage = inject<LocalStorage>();
   late Dio _client;
 
-  DioClient(Dio? dio) {
-    _client = dio ?? Dio();
+  DioClient() {
+    _client = Dio();
     _client.interceptors.add(_interceptor());
   }
 
