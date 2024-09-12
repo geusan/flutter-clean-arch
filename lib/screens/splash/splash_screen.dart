@@ -9,7 +9,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SpashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -38,14 +37,16 @@ class _SpashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("splash screen")),
-      body: Center(
-        child: Column(
-          children: [
-            const Text("move to home screen"),
-            Text("$timer seconds after")
-          ],
-        )
-      )
+      body: Expanded(
+        child: Center(
+          child: Column(
+            children: [
+              const Text("move to home screen"),
+              Text("$timer seconds after")
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

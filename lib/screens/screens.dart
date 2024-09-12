@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_arch/screens/chat/chat_list.screen.dart';
 import 'package:flutter_clean_arch/screens/chat/chat.screen.dart';
 import 'package:flutter_clean_arch/screens/home/home.screen.dart';
-import 'package:flutter_clean_arch/screens/spash/splash_screen.dart';
+import 'package:flutter_clean_arch/screens/splash/splash_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';

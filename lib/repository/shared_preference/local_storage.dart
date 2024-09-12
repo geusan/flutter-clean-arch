@@ -1,13 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum StorageKey {
-  token,
+  notification,
 }
 
 extension StorageKeyValue on StorageKey {
   String get value {
-    if (this == StorageKey.token) {
-      return 'token';
+    if (this == StorageKey.notification) {
+      return 'notification';
     }
     return '';
   }
