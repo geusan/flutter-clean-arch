@@ -1,3 +1,3 @@
 # 설명
 
-API와의 통신을 구현
+Network with api server
