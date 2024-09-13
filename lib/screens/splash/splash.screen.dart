@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_arch/screens/splash/splash.viewmodel.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -9,40 +11,33 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SpashScreenState extends State<SplashScreen> {
+  late SplashViewModel model =
+      Provider.of<SplashViewModel>(context, listen: false);
   @override
   void initState() {
     super.initState();
-    decrementTimer();
-  }
-
-  int timer = 5;
-
-  Future<void> decrementTimer() async {
-    await Future.delayed(const Duration(seconds: 1));
-    setState(() {
-      timer--;
+    model.passTime().then((_) {
+      goToHomeScreen();
     });
-    if (timer > 0) {
-      await decrementTimer();
-    } else {
-      await goToHomeScreen();
-    }
   }
 
   Future<void> goToHomeScreen() async {
-    Get.offNamed("/home");
+    Get.offNamed("/auth");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("splash screen")),
-      body: Expanded(
+      body: SafeArea(
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("move to home screen"),
-              Text("$timer seconds after")
+              Consumer<SplashViewModel>(builder: (context, vm, index) {
+                return Text("${vm.delay} seconds after");
+              }),
             ],
           ),
         ),
