@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_arch/constants/sizes.dart';
 import 'package:flutter_clean_arch/domain/chatroom.dart';
 import 'package:flutter_clean_arch/screens/chat/chat_list.viewmodel.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,16 @@ class ChatListScreen extends StatefulWidget {
 }
 
 class _ChatListScreenState extends State<ChatListScreen> {
+  late ChatListViewModel model = Provider.of(context, listen: false);
+  TextEditingController newChatNameController =
+      TextEditingController(text: 'New Chat');
+
+  @override
+  void initState() {
+    model.load();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     ChatListViewModel vm = context.watch<ChatListViewModel>();
@@ -29,7 +40,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                     padding: const EdgeInsets.fromLTRB(8, 6, 8, 6),
                     child: GestureDetector(
                       onTap: () => Get.toNamed("/chats/:chatId",
-                          arguments: [chatroom.chatroomId, chatroom.name]),
+                          arguments: [chatroom.id, chatroom.name]),
                       child: Container(
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
@@ -48,7 +59,34 @@ class _ChatListScreenState extends State<ChatListScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          vm.createChatroom("New Chat");
+          showDialog(
+              context: context,
+              builder: (context) {
+                return Padding(
+                    padding: EdgeInsets.all(Space.space4),
+                    child: Container(
+                        decoration: const BoxDecoration(color: Colors.white),
+                        child: Column(
+                          children: [
+                            TextField(
+                              controller: newChatNameController,
+                              onChanged: (value) => vm.setChatroomName(value),
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  vm.createChatroom().then((_) {
+                                    Navigator.of(context).pop();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                            content:
+                                                Text('chatroom is created!'),
+                                            duration: Duration(seconds: 5)));
+                                  });
+                                },
+                                child: const Text('Create'))
+                          ],
+                        )));
+              });
         },
         tooltip: "Add Chatroom",
         child: const Icon(Icons.add),
