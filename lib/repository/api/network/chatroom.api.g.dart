@@ -30,7 +30,7 @@ class _ChatroomApi implements ChatroomApi {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= '/rooms';
+    baseUrl ??= '/v1/rooms';
   }
 
   final Dio _dio;
@@ -43,7 +43,8 @@ class _ChatroomApi implements ChatroomApi {
   Future<List<Chatroom>> getChatrooms() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'accessToken': 'true'};
+    _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<List<Chatroom>>(Options(
       method: 'GET',
@@ -78,7 +79,8 @@ class _ChatroomApi implements ChatroomApi {
   Future<Chatroom> createChatroom(String name) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'accessToken': 'true'};
+    _headers.removeWhere((k, v) => v == null);
     final _data = {'name': name};
     final _options = _setStreamType<Chatroom>(Options(
       method: 'POST',
@@ -111,7 +113,8 @@ class _ChatroomApi implements ChatroomApi {
   Future<void> deleteChatroom(int id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'accessToken': 'true'};
+    _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(Options(
       method: 'DELETE',
@@ -133,12 +136,13 @@ class _ChatroomApi implements ChatroomApi {
   }
 
   @override
-  Future<void> openChatroom(int id) async {
+  Future<ResponseOpenChatroomDto> openChatroom(int id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'accessToken': 'true'};
+    _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<void>(Options(
+    final _options = _setStreamType<ResponseOpenChatroomDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -154,7 +158,15 @@ class _ChatroomApi implements ChatroomApi {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    await _dio.fetch<void>(_options);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ResponseOpenChatroomDto _value;
+    try {
+      _value = ResponseOpenChatroomDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

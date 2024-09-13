@@ -3,24 +3,6 @@
 part of 'auth.api.dart';
 
 // **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-ResponseAuthDto _$ResponseAuthDtoFromJson(Map<String, dynamic> json) =>
-    ResponseAuthDto(
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      token: json['token'] as String?,
-    );
-
-Map<String, dynamic> _$ResponseAuthDtoToJson(ResponseAuthDto instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'token': instance.token,
-    };
-
-// **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
@@ -31,7 +13,9 @@ class _AuthApi implements AuthApi {
     this._dio, {
     this.baseUrl,
     this.errorLogger,
-  });
+  }) {
+    baseUrl ??= '/v1';
+  }
 
   final Dio _dio;
 
@@ -40,7 +24,7 @@ class _AuthApi implements AuthApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ResponseAuthDto> register(
+  Future<User> register(
     String username,
     String password,
   ) async {
@@ -51,7 +35,7 @@ class _AuthApi implements AuthApi {
       'username': username,
       'password': password,
     };
-    final _options = _setStreamType<ResponseAuthDto>(Options(
+    final _options = _setStreamType<User>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -68,9 +52,9 @@ class _AuthApi implements AuthApi {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ResponseAuthDto _value;
+    late User _value;
     try {
-      _value = ResponseAuthDto.fromJson(_result.data!);
+      _value = User.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -79,7 +63,7 @@ class _AuthApi implements AuthApi {
   }
 
   @override
-  Future<ResponseAuthDto> login(
+  Future<User> login(
     String username,
     String password,
   ) async {
@@ -90,7 +74,7 @@ class _AuthApi implements AuthApi {
       'username': username,
       'password': password,
     };
-    final _options = _setStreamType<ResponseAuthDto>(Options(
+    final _options = _setStreamType<User>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -107,9 +91,9 @@ class _AuthApi implements AuthApi {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ResponseAuthDto _value;
+    late User _value;
     try {
-      _value = ResponseAuthDto.fromJson(_result.data!);
+      _value = User.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
