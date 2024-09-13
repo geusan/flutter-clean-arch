@@ -4,9 +4,9 @@ part 'chatroom.g.dart';
 
 @JsonSerializable()
 class Chatroom {
-  int chatroomId;
+  int id;
   String name;
-  Chatroom({required this.chatroomId, required this.name});
+  Chatroom({required this.id, required this.name});
   factory Chatroom.fromJson(Map<String, dynamic> json) => _$ChatroomFromJson(json);
   Map<String, dynamic> toJson() => _$ChatroomToJson(this);
 }

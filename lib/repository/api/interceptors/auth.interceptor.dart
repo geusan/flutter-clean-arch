@@ -9,9 +9,9 @@ class AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     // If retrofit usecase with below
-    // @Headers({"withAccessToken": "any value"})
-    if (options.headers[StorageKeys.withAccessToken.value] != null) {
-      options.headers.remove(StorageKeys.withAccessToken.value);
+    // @Headers({"accessToken": "true"})
+    if (options.headers["accessToken"] == "true") {
+      options.headers.remove("accessToken");
 
       String? token = await storage.read(key: StorageKeys.accessToken.value);
 
@@ -21,5 +21,14 @@ class AuthInterceptor extends Interceptor {
       
     }
     super.onRequest(options, handler);
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    final token = response.headers['set-authorization'];
+    if (token != null && token.isNotEmpty) {
+      storage.write(key: StorageKeys.accessToken.value, value: token[0]);
+    }
+    super.onResponse(response, handler);
   }
 }

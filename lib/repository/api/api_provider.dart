@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_clean_arch/repository/api/constants.dart';
+import 'package:flutter_clean_arch/repository/api/endpoints.dart';
 import 'package:flutter_clean_arch/repository/api/interceptors/auth.interceptor.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -24,7 +24,7 @@ class ApiProvider {
       requestHeader: true,
         requestBody: true,
         responseBody: true,
-        responseHeader: false,
+        responseHeader: true,
         error: true,
         compact: true,
         maxWidth: 90,
