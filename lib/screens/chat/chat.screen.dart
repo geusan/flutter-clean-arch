@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_arch/screens/chat/chat.viewmodel.dart';
 import 'package:flutter_clean_arch/values/sizes.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -18,8 +19,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      model.init(4);
-      // model.init(Get.arguments[0] as int);
+      model.init(Get.arguments[0] as int);
     });
   }
 
