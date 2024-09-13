@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_arch/di.dart';
 import 'package:flutter_clean_arch/screens/auth/auth.viewmodel.dart';
+import 'package:flutter_clean_arch/screens/chat/chat.viewmodel.dart';
 import 'package:flutter_clean_arch/screens/chat/chat_list.viewmodel.dart';
 import 'package:flutter_clean_arch/screens/home/home.viewmodel.dart';
 import 'package:flutter_clean_arch/screens/screens.dart';
@@ -43,6 +44,9 @@ class Application extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => ChatListViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => ChatViewModel(),
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => AuthViewModel(),

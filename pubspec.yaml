@@ -57,6 +57,8 @@ dependencies:
   retrofit: ^4.4.0
   logger: ^2.4.0  # for logging purpose
   json_annotation: ^4.9.0
+  # web socket
+  web_socket_channel: ^2.0.1
 
 dev_dependencies:
   flutter_test:
