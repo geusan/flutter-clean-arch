@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_arch/constants/sizes.dart';
+import 'package:flutter_clean_arch/values/sizes.dart';
 import 'package:flutter_clean_arch/domain/chatroom.dart';
 import 'package:flutter_clean_arch/screens/chat/chat_list.viewmodel.dart';
 import 'package:get/get.dart';
