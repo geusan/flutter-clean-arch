@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_arch/di.dart';
+import 'package:flutter_clean_arch/screens/auth/auth.viewmodel.dart';
 import 'package:flutter_clean_arch/screens/chat/chat_list.viewmodel.dart';
 import 'package:flutter_clean_arch/screens/home/home.viewmodel.dart';
 import 'package:flutter_clean_arch/screens/screens.dart';
+import 'package:flutter_clean_arch/screens/splash/splash.viewmodel.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   // dependency injection
   setupDI();
   // intialize loading
@@ -36,7 +39,13 @@ class Application extends StatelessWidget {
           create: (BuildContext context) => HomeViewModel(),
         ),
         ChangeNotifierProvider(
+          create: (BuildContext context) => SplashViewModel(),
+        ),
+        ChangeNotifierProvider(
           create: (BuildContext context) => ChatListViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => AuthViewModel(),
         ),
       ],
       child: const Screens(),
