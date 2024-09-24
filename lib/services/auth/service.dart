@@ -18,7 +18,7 @@ class AuthService {
     return user;
   }
   Future<Iterable<Noti>> getNotifications() async {
-    final items = await table.findMany('');
+    final items = await table.findMany();
     return items;
   }
 }

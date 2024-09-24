@@ -17,10 +17,6 @@ abstract interface class IModelAction<T> {
     throw UnimplementedError();
   }
 
-  Future<Iterable<T>> findMany(dynamic query) async {
-    throw UnimplementedError();
-  }
-
   static Future<void> creatTable() async {
     throw UnimplementedError();
   }

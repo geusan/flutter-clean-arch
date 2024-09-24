@@ -59,9 +59,8 @@ class NotiTable implements IModelAction<Noti> {
     await conn.delete(where: 'id = ?', whereArgs: [item.id]);
   }
 
-  @override
-  Future<Iterable<Noti>> findMany(dynamic query) async {
-    final items = await conn.query(where: 'id in (?)');
+  Future<Iterable<Noti>> findMany() async {
+    final items = await conn.query();
     final notis = items.map((e) => translator.fromJson(e));
     return notis;
   }
